@@ -11,6 +11,9 @@ Strategies applied to models:
 - Option 1: Permutation importance
 - Option 2: drop column importance
 
+
+Given above 5 different feature importance strategies, different strategies will rank their feature imporance differently. I have chosen 3 models for comparison purpose. 1) Regression, 2) Random Forest and 3) XGBoostRegressor. 
+
 <table border="0">
 <tr valign="top" border="0">
 <td border="0"><img src="image/Regression_comp.png" width="100%"></a></td>
