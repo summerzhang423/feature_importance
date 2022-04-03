@@ -82,8 +82,8 @@ scores, best_method, model, features = auto_select(reg, x_train, y_train, x_val,
 print(f'The best feature selection method is {best_method} and top {k} features selected by this method is: {features}')
 ```
 
-<img src="image/reg_selection.png" width="300">
-<img src="image/result.png" width="300">
+<img src="image/reg_selection.png" width="500">
+<img src="image/result.png" width="600">
 
 
 
