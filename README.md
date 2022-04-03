@@ -15,6 +15,6 @@ Strategies applied to models:
 <tr valign="top" border="0">
 <td border="0"><img src="image/Regression_comp.png" width="100%"></a></td>
 <td border="0"><img src="image/RF_comp.png" width="100%"></a></td>	
-<td border="0"><img src="image/XGBoostregression_comp.png" width="100%"></a></td>	
+<td border="0"><img src="image/XGBoostRegressor_comp.png" width="100%"></a></td>	
 </tr>
 </table>
