@@ -13,7 +13,7 @@ Strategies applied to models:
 
 <table border="0">
 <tr valign="top" border="0">
-<td border="0"><img src="image/Regression_comp.png" width="100%"></a></td>
-<td border="0"><img src="imgae/RF_comp.png" width="100%"></a></td>			
+<td border="0"><img src="image/Regression_comp.png" width="80%"></a></td>
+<td border="0"><img src="image/RF_comp.png" width="80%"></a></td>			
 </tr>
 </table>
