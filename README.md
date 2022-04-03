@@ -83,7 +83,9 @@ print(f'The best feature selection method is {best_method} and top {k} features 
 ```
 
 <img src="image/reg_selection.png" width="500">
-<img src="image/result.png" width="600">
+<img src="image/result.png" width="1000">
 
+# Conclusion
 
+Feature importance helps us reduce the computation cost since you would be 'neglecting' some of the unimportant features and thus improve calculation efficiency. It could help reduce the cost associated with data collection since less is needed. More importantly, it could improve interpretability (the situation of "less is more") of the dataset and the model, which improves effectiveness and efficiency of your work. 
 
