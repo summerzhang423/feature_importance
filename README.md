@@ -27,7 +27,53 @@ From the comparison above we can see:
 - While some features seems to be more appealing to one of the models, it might not be the case for other models. i.e. Permutation strategy seems to work well with regression model, but it did not perform as well with XGBoostRegressor model
 - Depending on how many features we want to select, our choice of strategy might differ as well. i.e. for XGBoostRegressor, if only 4 features are wanted, **drop column** is a better strategy in comparison. However, if we want top 10 features instead, **permutation** will be a better strategy than drop column (due to smaller MAE score)
 
-* Auto Feature Importance Selection Algorithm
+# Auto Feature Importance Selection Algorithm
+
+The question the becomes: "How can we know which feature selection method shall be used given a model"? The answer to that is to use an automated feature importance selection algorithm. Let the algorithm run iteratively through different methods and return the method that can generate the lowest MAE score. 
+```
+ def auto_select(model, x_train, y_train, x_val, y_val, k):
+    
+    rank_spearman = list(spearman(x_train, y_train).keys())[:k]
+    rank_pca = pca(x_train)[0].columns.tolist()[:k]
+    mrmr = mRMR(x_train, y_train, 13)[:k]
+    permutation = list(eval_metrics(model, x_train, y_train, x_val, y_val, 'neg_mean_absolute_percentage_error', graph=False)['features'])[:k]
+    drop_col = list(dropcol_regression(model, x_train, y_train, x_val, y_val).index)[:k]
+    
+    feature_lists = [rank_spearman, rank_pca, mrmr, permutation, drop_col]
+    methods = ['rank_spearman', 'rank_pca', 'mrmr', 'permutation', 'drop_col']
+    
+    model.fit(x_train, y_train)
+    y_hat = model.predict(x_val)
+    baseline = metrics.mean_absolute_error(y_val, y_hat)
+
+    scores = {}
+    for i, feature in enumerate(feature_lists):
+        X_train = x_train[feature] 
+        X_val = x_val[feature]
+
+        model_new = model.fit(X_train, y_train)
+        y_hat_new = model_new.predict(X_val)
+        mae_new = round(metrics.mean_absolute_error(y_val, y_hat_new), 3)
+        method = methods[i]
+        scores[method] = mae_new
+        
+    best_method = min(scores, key=scores.get)
+    features = feature_lists[methods.index(best_method)]
+
+    fig,ax = plt.subplots(figsize = (8,6))
+    methods = list(scores.keys())
+    mae_scores = list(scores.values())
+
+    ax.bar(methods,mae_scores,color = '#003f5c')
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_title('Auto-select Feature Selection Method')
+    ax.set_xlabel('Type of Feature Selection Method')
+    ax.set_ylabel('Metric: MAE score')
+    plt.show() 
+    return scores, best_method, model, features
+ ```
 
 
 
