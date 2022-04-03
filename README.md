@@ -1,4 +1,4 @@
-# feature_importance
+# Feature Importance
 
 This report is dedicated to provide a detailed explaination on feature importance, different technics used to measure feature importance and an auto selection function that could pick the best feature selection method for a given ML model.
 
@@ -75,6 +75,15 @@ The question the becomes: "How can we know which feature selection method shall 
     return scores, best_method, model, features
  ```
 
+Given model, x_train, x_valid, y_train, y_valid and ideal number of feature, this `auto_select` function is able to return a table with the most suitable feature selection method, ranked features and a graph indicates each method's corresponding MAE score
+
+```
+scores, best_method, model, features = auto_select(reg, x_train, y_train, x_val, y_val, k)
+print(f'The best feature selection method is {best_method} and top {k} features selected by this method is: {features}')
+```
+
+<img src="image/reg_selection.png" width="300">
+<img src="image/result.png" width="300">
 
 
 
